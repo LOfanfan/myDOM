@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>手机页面模版</title>
+    <script src="js/prefixfree.min.js" charset="utf-8"></script>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <!-- 设置缩放 -->
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+    <!-- 可隐藏地址栏，进队IOS的Safari（注：IOS7.0版本以后，Safari上已经看不到效果） -->
+　　	<meta name="apple-mobile-web-app-capable" content="yes">
+    <!-- 仅针对IOS的Safari顶端状态条的样式 -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <!-- IOS中禁用将数字识别为电话号码/忽略Android平台中对邮箱地址的识别 -->
+    <meta name="format-detection" content="telephone=no">
+    <meta name="format-detection" content="email=no">
+    <!-- 启用360浏览器的极速模式（webkit） -->
+    <meta name="renderer" content="webkit">
+    <!-- 避免IE使用兼容模式 -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  </head>
+  <body>
+  </body>
+  <script type="text/javascript">
+  	//根据屏幕的尺寸自动获取字体的大小
+    var ele=document.getElementsByTagName("html")[0];
+    size=document.body.clientWidth/640*24;
+    ele.style.fontSize=size+"px";
+  </script>
+</html>

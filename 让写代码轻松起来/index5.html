@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="renderer" content="webkit">
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	    <meta name="description" content="不超过150个字符"/>
+	    <meta name="keywords" content=""/>
+		<title>jQuery实现的三种轮播图</title>
+		<!--必须放在第一个，为css自动添加前缀-->
+		<script src="js/prefixfree.min.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			.box,.box2,.box3{
+				width:800px;
+				height:260px;
+				margin:160px auto;
+				overflow:hidden;
+				position:relative;}
+			.box,.box2,.box3 p{
+				text-align:center;}
+			.picBox,.picBox2,.picBox3{
+				margin:0px;
+				padding:0px;
+				list-style:none;
+				width:1500px;}	 <!--此处很关键，在实现无疑轮播时这个宽度一定要比显示图片数量+1的宽度宽-->
+			.picBox:hover,.picBox2:hover,.picBox3:hover{
+				cursor:pointer;}
+			.picBox li,.picBox2 li,.picBox3 li{
+				float:left;}
+			.picBox img,.picBox2 img,.picBox3 img{
+				width:200px;
+				height:240px;}
+			.box3 p span{
+				display: inline-block;
+				width: 30px;
+				height: 30px;
+				line-height: 30px;
+				text-align: center;
+				margin-left: 30px;
+				background-color: #CCCCCC;
+				cursor: pointer;
+			}
+		</style>
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
+		<script src="js/jquery-1.11.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div class="box">
+			<p>第一种图片轮播：非无缝轮播</p>
+			<ul class="picBox">
+				<li><img src="img/1.jpg"/></li>
+				<li><img src="img/2.jpg"/></li>
+				<li><img src="img/1.jpg"/></li>
+				<li><img src="img/2.jpg"/></li>
+				<li><img src="img/1.jpg"/></li>
+				<li><img src="img/2.jpg"/></li>
+			</ul>
+		</div>
+		<div class="box2">
+			<p>第二种图片轮播：无缝轮播</p>
+			<ul class="picBox2">
+				<li><img src="img/1.jpg"/></li>
+				<li><img src="img/2.jpg"/></li>
+				<li><img src="img/1.jpg"/></li>
+				<li><img src="img/2.jpg"/></li>
+				<li><img src="img/1.jpg"/></li>
+				<li><img src="img/2.jpg"/></li>
+			</ul>
+		</div>
+		<div class="box3">
+			<p>第三种图片轮播：无缝轮播<span class="left"><</span><span class="right">></span></p>
+			<ul class="picBox3">
+				<li><img src="img/1.jpg"/></li>
+				<li><img src="img/2.jpg"/></li>
+				<li><img src="img/1.jpg"/></li>
+				<li><img src="img/2.jpg"/></li>
+				<li><img src="img/1.jpg"/></li>
+				<li><img src="img/2.jpg"/></li>
+			</ul>
+		</div>
+	</body>
+	<script>
+		$(function(){
+			<!--第一种图片轮播：非无缝轮播-->
+			function rollOne(){
+				$(".picBox li:first").animate({left:"-=200px"},1000,"linear",function(){
+					$(this).remove().clone(true).appendTo(".picBox").fadeIn("2000");	
+				});		
+			}
+			var startRollOne=setInterval(rollOne,2000);
+			<!--鼠标移入停止移出继续-->	
+			$(".box").hover(function(){
+				clearInterval(startRollOne);	
+			},function(){
+				startRollOne=setInterval(rollOne,2000);	
+			});
+			<!--第二种图片轮播：无缝轮播-->
+			<!--这种无缝轮播可以通过设置animate动画播放速度值和setInterval中的函数调用时间间隔实现间隔无缝轮播-->
+			function rollTwo(){
+				$(".picBox2").animate({marginLeft:"-200px"},2000,"linear",function(){
+					$(".picBox2").css({marginLeft:"0px"});
+					$(".picBox2 li:first").remove().clone(true).appendTo(".picBox2");	
+				})	
+			}
+			var startRollTwo=setInterval(rollTwo,2000);
+			<!--鼠标移入停止移出继续-->
+			$(".picBox2").hover(function(){
+				clearInterval(startRollTwo);	
+			},function(){
+				startRollTwo=setInterval(rollTwo,2000);	
+			});
+			<!--第三种图片轮播：无缝轮播-->
+			<!--这种无缝轮播可以通过设置animate动画播放速度值和setInterval中的函数调用时间间隔实现间隔无缝轮播-->
+			function rollThree(){
+				$(".picBox3").animate({marginLeft:"-200px"},1000,"linear",function(){
+					$(".picBox3").css({marginLeft:"0px"});
+					$(".picBox3 li:first").remove().clone(true).appendTo(".picBox3");	
+				})	
+			}
+			var startRollThree=setInterval(rollThree,2000);
+			<!--鼠标移入停止移出继续-->
+			$(".picBox3").hover(function(){
+				clearInterval(startRollThree);	
+			},function(){
+				startRollThree=setInterval(rollThree,2000);	
+			});
+			$(".box3 span").hover(function(){
+				clearInterval(startRollThree);	
+			},function(){
+				startRollThree=setInterval(rollThree,2000);	
+			});
+			$(".left").click(function(){
+				$(".picBox3").animate({marginLeft:"200px"},1000,"linear",function(){
+					$(".picBox3 li:last").remove().clone(true).prependTo(".picBox3");
+					$(".picBox3").css({marginLeft:"0px"});
+					$(".picBox3 li:last").css("margin-left","0px");
+				})
+			})
+			$(".right").click(function(){
+				$(".picBox3").animate({marginLeft:"-200px"},1000,"linear",function(){
+					$(".picBox3 li:first").remove().clone(true).appendTo(".picBox3");
+					$(".picBox3").css({marginLeft:"0px"});
+				})
+			})
+		});
+	</script>
+</html>
