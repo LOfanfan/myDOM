@@ -105,3 +105,45 @@ function displayCitations() {
 		var url = quotes[i].getAttribute("cite");
 	}
 }
+//DOM方法，鼠标悬停在某个表格行的上方时，把该行文本加黑加粗
+			function highlightRows() {
+				if (!document.getElementsByTagName) return false;
+				var table = document.getElementsByTagName("table")[0];
+				var rows = document.getElementsByTagName("tr");
+				for (var i = 0; i < rows.length; i++) {
+					rows[i].onmouseover = function() {
+						this.style.fontWeight = "bold";
+					};
+					rows[i].onmouseout = function() {
+						this.style.fontWeight = "normal";
+					};
+				}
+			}
+//为元素添加class，封装为一个函数
+function addClass(element, value) {
+	if (!element.className) {
+		element.className = value;
+	} else {
+		newClass = element.className;
+		newClass += " ";
+		newClass += value;
+		element.className = newClass;
+	}
+}
+//表格斑马线效果的实现
+function stripeTable() {
+	if (!document.getElementsByTagName) return false;
+	var tables = document.getElementsByTagName("table");
+	var odd, rows;
+	for (var i = 0; i < tables.length; i++) {
+		odd = false;
+		rows = tables[i].getElementsByTagName("tr");
+		for (var j = 0; j < rows.length; j++) {
+			if (odd == true) {
+				rows[j].style.backgroundColor = "#ffc";
+			} else{
+				odd = true;
+			}
+		}
+	}
+}

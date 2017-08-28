@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>加密</title>
+		
+	</head>
+	<body>
+		<script src="js/base64.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/md5.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/sha1.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+//			base64加密
+			var base64 = new Base64();
+			//加密操作
+			var strBase64 = base64.encode("wangdi");
+			console.log("王迪进行base64加密：" + strBase64);
+			//解密操作
+			var strBase64 = base64.decode(strBase64);
+			console.log("王迪进行base64解密：" + strBase64);
+			
+			//md5加密
+			var md5 = hex_md5("wangdi");
+			console.log("王迪进行md5加密：" + md5);
+			var md5 = hex_hmac_md5(md5);
+			console.log("王迪进行base64解密：" + md5);
+			
+			//sha1加密
+			var sha1 = hex_sha1("wangdi");
+			console.log("王迪进行sha1加密：" + sha1);
+		</script>
+	</body>
+</html>
